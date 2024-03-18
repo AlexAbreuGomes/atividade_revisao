@@ -80,3 +80,26 @@ class Tarefa extends Projetos {
             this.prazo = prazo;
     }
 }
+class Gerente extends Funcionario {
+    departamento;
+    constructor(nome, id_membro, endereco, email, telefone, formacao, departamento) {
+        super(nome, id_membro, endereco, email, telefone, formacao);
+        this.departamento = departamento;
+    }
+}
+// Classe Desenvolvedor herda de Funcionario
+class Desenvolvedor extends Funcionario {
+    linguagem;
+    constructor(nome, id_membro, endereco, email, telefone, formacao, linguagem) {
+        super(nome, id_membro, endereco, email, telefone, formacao);
+        this.linguagem = linguagem;
+    }
+}
+// Classe Designer herda de Funcionario
+class Designer extends Funcionario {
+    ferramenta;
+    constructor(nome, id_membro, endereco, email, telefone, formacao, ferramenta) {
+        super(nome, id_membro, endereco, email, telefone, formacao);
+        this.ferramenta = ferramenta;
+    }
+}

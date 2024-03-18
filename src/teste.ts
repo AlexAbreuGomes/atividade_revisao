@@ -106,9 +106,9 @@ class Projetos {
 }
 
 class Tarefa extends Projetos {
-    public descricao: string;
-    public responsavel: Equipe;
-    public prazo: Date;
+    protected descricao: string;
+    protected responsavel: Equipe;
+    protected prazo: Date;
 
     constructor(
         projeto_Andamento: number,
@@ -126,3 +126,55 @@ class Tarefa extends Projetos {
     }
 }
 
+class Gerente extends Funcionario {
+    public departamento: string;
+
+    constructor(
+        nome: string,
+        id_membro: string,
+        endereco: string,
+        email: string,
+        telefone: string,
+        formacao: string,
+        departamento: string
+    ) {
+        super(nome, id_membro, endereco, email, telefone, formacao);
+        this.departamento = departamento;
+    }
+}
+
+// Classe Desenvolvedor herda de Funcionario
+class Desenvolvedor extends Funcionario {
+    public linguagem: string;
+
+    constructor(
+        nome: string,
+        id_membro: string,
+        endereco: string,
+        email: string,
+        telefone: string,
+        formacao: string,
+        linguagem: string
+    ) {
+        super(nome, id_membro, endereco, email, telefone, formacao);
+        this.linguagem = linguagem;
+    }
+}
+
+// Classe Designer herda de Funcionario
+class Designer extends Funcionario {
+    public ferramenta: string;
+
+    constructor(
+        nome: string,
+        id_membro: string,
+        endereco: string,
+        email: string,
+        telefone: string,
+        formacao: string,
+        ferramenta: string
+    ) {
+        super(nome, id_membro, endereco, email, telefone, formacao);
+        this.ferramenta = ferramenta;
+    }
+}
