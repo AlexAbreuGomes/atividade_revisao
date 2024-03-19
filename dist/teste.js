@@ -38,6 +38,13 @@ class Funcionario {
     setTelefone(telefone) {
         this.telefone = telefone;
     }
+    // Método para mostrar os dados privados estudar sobre 
+    mostrarDadosPrivados() {
+        console.log(`ID de membro: ${this.id_membro}`);
+        console.log(`Endereço: ${this.endereco}`);
+        console.log(`E-mail: ${this.email}`);
+        console.log(`Telefone: ${this.telefone}`);
+    }
 }
 class Lider {
     lider;
@@ -87,7 +94,6 @@ class Gerente extends Funcionario {
         this.departamento = departamento;
     }
 }
-// Classe Desenvolvedor herda de Funcionario
 class Desenvolvedor extends Funcionario {
     linguagem;
     constructor(nome, id_membro, endereco, email, telefone, formacao, linguagem) {
@@ -95,7 +101,6 @@ class Desenvolvedor extends Funcionario {
         this.linguagem = linguagem;
     }
 }
-// Classe Designer herda de Funcionario
 class Designer extends Funcionario {
     ferramenta;
     constructor(nome, id_membro, endereco, email, telefone, formacao, ferramenta) {
@@ -103,3 +108,18 @@ class Designer extends Funcionario {
         this.ferramenta = ferramenta;
     }
 }
+// Instâncias de Funcionario
+const funcionario1 = new Funcionario('João Silva', '001', 'Rua A, 123', 'joao@example.com', '123456789', 'Graduação');
+const funcionario2 = new Funcionario('Maria Santos', '002', 'Rua B, 456', 'maria@example.com', '987654321', 'Pós-graduação');
+// Instâncias de Lider
+const lider1 = new Lider(funcionario1);
+const lider2 = new Lider(funcionario2);
+// Instâncias de Equipe
+const equipe1 = new Equipe(lider1, 'projeto001', funcionario1);
+const equipe2 = new Equipe(lider2, 'projeto002', funcionario2);
+// Instâncias de Projetos
+const projeto1 = new Projetos(0, 'Projeto A', new Date('2024-01-01'), new Date('2024-12-31'), equipe1);
+const projeto2 = new Projetos(0, 'Projeto B', new Date('2024-02-01'), new Date('2024-12-31'), equipe2);
+// Instâncias de Tarefa
+const tarefa1 = new Tarefa(0, 'Projeto A', new Date('2024-01-01'), new Date('2024-12-31'), equipe1, 'Descrição da tarefa 1', equipe1, new Date('2024-12-31'));
+const tarefa2 = new Tarefa(0, 'Projeto B', new Date('2024-02-01'), new Date('2024-12-31'), equipe2, 'Descrição da tarefa 2', equipe2, new Date('2024-11-20'));
