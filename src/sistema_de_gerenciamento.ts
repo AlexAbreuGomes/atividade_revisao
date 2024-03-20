@@ -21,7 +21,7 @@ class Funcionario {
         this.telefone = telefone;
         this.formacao = formacao;
     }
-
+ // Método para mostrar os dados privados estudar sobre 
     getId_membro(): string {
         return this.id_membro;
     }
@@ -72,54 +72,53 @@ class Lider {
         lider: Funcionario) {
         this.lider = lider;
     }
-
-    getLider():Funcionario{
+ // Método para mostrar os dados privados estudar sobre 
+    getLider(): Funcionario {
         return this.lider;
     }
 
-    setLider(lider:Funcionario): void {
+    setLider(lider: Funcionario): void {
         this.lider = lider;
     }
 
     mostrarDadosLider(): void {
-        console.log(`Nome: ${funcionario2.nome}`);
-        console.log(`ID Membro: ${funcionario2.getId_membro()}`)
-        console.log(`Nome: ${funcionario1.nome}`);
-        console.log(`ID Membro: ${funcionario1.getId_membro()}`)
+        console.log("Dados do Líder:");
+        console.log(`Nome: ${this.lider.nome}`);
+        console.log(`ID Membro: ${this.lider.getId_membro()}`);
     }
 }
 
 class Equipe {
     protected lider: Lider;
     public id_projeto: string;
-    public membros: Funcionario;
+    public membros: Funcionario[];
 
     constructor(
         lider: Lider,
         id_projeto: string,
-        membros: Funcionario) {
+        membros: Funcionario[]) {
 
         this.lider = lider;
         this.id_projeto = id_projeto;
         this.membros = membros;
     }
-
-    getLider():Lider{
+ // Método para mostrar os dados privados estudar sobre 
+    getLider(): Lider {
         return this.lider;
     }
 
-    setLider(lider:Lider): void {
+    setLider(lider: Lider): void {
         this.lider = lider;
     }
 
     mostrarDadosEquipe(): void {
         console.log(`Lider: ${funcionario1.nome}`);
-        console.log(`ID projeto: ${projeto1}`)
-        console.log(`Membros: ${funcionario1}`)
-    }   
-    
+        console.log(`ID projeto: ${this.id_projeto}`)
+        console.log(`Membros: ${funcionario2}`)
+    }
+
 }
- 
+
 class Projetos {
     protected projeto_andamento: number;
     protected nome_projeto: string;
@@ -180,7 +179,15 @@ class Projetos {
     setEquipe_projeto(equipe_projeto: Equipe): void {
         this.equipe_projeto = equipe_projeto;
     }
-    
+
+    mostrarDadosprojeto(): void {
+        console.log(`Projeto em andamneto: ${this.getProjeto_andamento()}`);
+        console.log(`Nome projeto: ${this.getNome_projeto()}`);
+        console.log(`Data inicial: ${this.getData_inicial()}`);
+        console.log(`Data limite: ${this.getData_limite()}`);
+        console.log(`Equipe responsável: ${this.getEquipe_projeto().membros}`);
+    }
+
 }
 
 class Tarefa extends Projetos {
@@ -198,7 +205,7 @@ class Tarefa extends Projetos {
         responsavel: Equipe,
         prazo: Date) {
         super(projeto_andamento, nome_projeto, data_inicial, data_limite, equipe_projeto);
-        this.descricao = descricao,
+            this.descricao = descricao,
             this.responsavel = responsavel,
             this.prazo = prazo
     }
@@ -226,6 +233,17 @@ class Tarefa extends Projetos {
         this.prazo = prazo
     }
 
+    mostrarDadosTarefas(): void {
+    /*super.mostrarDadosprojeto();
+    console.log(`Descrição: ${this.getDescricao()}`);
+    console.log(`Lider Responsavel: ${this.getResponsavel().getLider().getLider().nome}`);
+    console.log(`Prazo de entrega: ${this.getPrazo()}`);*/
+
+    super.mostrarDadosprojeto(); // Chamando o método mostrarDadosprojeto da classe pai
+    console.log(`Descrição: ${this.getDescricao()}`);
+    console.log(`Lider Responsavel: ${this.getResponsavel().getLider()}`);
+    console.log(`Prazo de entrega: ${this.getPrazo()}`);
+    }
 }
 
 class Gerente extends Funcionario {
@@ -238,10 +256,14 @@ class Gerente extends Funcionario {
         email: string,
         telefone: string,
         formacao: string,
-        departamento: string
-    ) {
+        departamento: string) {
         super(nome, id_membro, endereco, email, telefone, formacao);
         this.departamento = departamento;
+    }
+
+    mostrarDadosGerente(): void {
+        super.mostrarDadosFuncionarios();
+        console.log(`Departamento: ${this.departamento}`)
     }
 }
 
@@ -255,13 +277,16 @@ class Desenvolvedor extends Funcionario {
         email: string,
         telefone: string,
         formacao: string,
-        linguagem: string
-    ) {
+        linguagem: string) {
         super(nome, id_membro, endereco, email, telefone, formacao);
         this.linguagem = linguagem;
     }
-}
 
+    mostrarDadosDev(): void {
+        super.mostrarDadosFuncionarios();
+        console.log(`Linguagem: ${this.linguagem}`)
+    }
+}    
 class Designer extends Funcionario {
     public ferramenta: string;
 
@@ -272,14 +297,17 @@ class Designer extends Funcionario {
         email: string,
         telefone: string,
         formacao: string,
-        ferramenta: string
-    ) {
+        ferramenta: string) {
         super(nome, id_membro, endereco, email, telefone, formacao);
         this.ferramenta = ferramenta;
     }
+
+    mostrarDadosDesigner(): void {
+        super.mostrarDadosFuncionarios();
+        console.log(`Ferramenta: ${this.ferramenta}`)
+
+    }
 }
-
-
 
 // Instâncias de Funcionario
 const funcionario1 = new Funcionario('João Silva', '001', 'Rua A, 123', 'joao@example.com', '123456789', 'Graduação');
@@ -296,19 +324,19 @@ lider1.mostrarDadosLider()
 lider2.mostrarDadosLider()
 
 // Instâncias de Equipe
-const equipe1 = new Equipe(lider1, 'projeto001', funcionario1);
-const equipe2 = new Equipe(lider2, 'projeto002', funcionario2);
+const equipe1 = new Equipe(lider1, 'projeto001', [funcionario1]);
+const equipe2 = new Equipe(lider2, 'projeto002', [funcionario2]);
 equipe1.mostrarDadosEquipe();
 equipe2.mostrarDadosEquipe();
 
 // Instâncias de Projetos
 const projeto1 = new Projetos(0, 'Projeto A', new Date('2024-01-01'), new Date('2024-12-31'), equipe1);
 const projeto2 = new Projetos(0, 'Projeto B', new Date('2024-02-01'), new Date('2024-12-31'), equipe2);
-
+projeto1.mostrarDadosprojeto();
+projeto2.mostrarDadosprojeto();
 
 // Instâncias de Tarefa
 const tarefa1 = new Tarefa(0, 'Projeto A', new Date('2024-01-01'), new Date('2024-12-31'), equipe1, 'Descrição da tarefa 1', equipe1, new Date('2024-12-31'));
-const tarefa2 = new Tarefa(0, 'Projeto B', new Date('2024-02-01'), new Date('2024-12-31'), equipe2, 'Descrição da tarefa 2', equipe2, new Date ('2024-11-20'));
-
-
-
+const tarefa2 = new Tarefa(0, 'Projeto B', new Date('2024-02-01'), new Date('2024-12-31'), equipe2, 'Descrição da tarefa 2', equipe2, new Date('2024-11-20'));
+tarefa1.mostrarDadosTarefas();
+tarefa2.mostrarDadosTarefas();
